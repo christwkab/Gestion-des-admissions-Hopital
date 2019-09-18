@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NLHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Chambre">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dep_id" Type="Int32" />
+    <Property Name="Typ_id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="chambre1" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Departement" Relationship="Self.FK_CHAMBRES_ASSOCIATI_DEPARTEM" FromRole="Chambres" ToRole="Departement" />
+    <NavigationProperty Name="TypeChambre" Relationship="Self.FK_CHAMBRES_ASSOCIATI_TYPECHAM" FromRole="Chambres" ToRole="TypeChambre" />
+    <NavigationProperty Name="Lits" Relationship="Self.FK_LITS_ASSOCIATI_CHAMBRES" FromRole="Chambres" ToRole="Lits" />
+  </EntityType>
+  <EntityType Name="Departement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nom" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Chambres" Relationship="Self.FK_CHAMBRES_ASSOCIATI_DEPARTEM" FromRole="Departement" ToRole="Chambres" />
+  </EntityType>
+  <EntityType Name="FichierAdmission">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Pat_id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="Med_id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="dateAdmission" Type="DateTime" Precision="3" />
+    <Property Name="parentProche" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="assurance" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="conge" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="dateConge" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Medecien" Relationship="Self.FK_FICHIERA_ASSOCIATI_MEDECIEN" FromRole="FichierAdmissions" ToRole="Medecien" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_FICHIERA_ASSOCIATI_PATIENTS" FromRole="FichierAdmissions" ToRole="Patients" />
+    <NavigationProperty Name="Lits" Relationship="Self.FK_LITS_ASSOCIATI_FICHIERA" FromRole="FichierAdmissions" ToRole="Lits" />
+  </EntityType>
+  <EntityType Name="Lit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fic_id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cha_id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Etat" Type="Boolean" />
+    <NavigationProperty Name="Chambre" Relationship="Self.FK_LITS_ASSOCIATI_CHAMBRES" FromRole="Lits" ToRole="Chambres" />
+    <NavigationProperty Name="FichierAdmission" Relationship="Self.FK_LITS_ASSOCIATI_FICHIERA" FromRole="Lits" ToRole="FichierAdmissions" />
+  </EntityType>
+  <EntityType Name="Medecien">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nom" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="prenom" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="titre" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="userId" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="pwd" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FichierAdmissions" Relationship="Self.FK_FICHIERA_ASSOCIATI_MEDECIEN" FromRole="Medecien" ToRole="FichierAdmissions" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nom" Type="Int32" />
+    <Property Name="prenom" Type="Int32" />
+    <Property Name="dateNaissance" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="FichierAdmissions" Relationship="Self.FK_FICHIERA_ASSOCIATI_PATIENTS" FromRole="Patients" ToRole="FichierAdmissions" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TypeChambre">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+    <Property Name="prix" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Chambres" Relationship="Self.FK_CHAMBRES_ASSOCIATI_TYPECHAM" FromRole="TypeChambre" ToRole="Chambres" />
+  </EntityType>
+  <Association Name="FK_CHAMBRES_ASSOCIATI_DEPARTEM">
+    <End Role="Departement" Type="Self.Departement" Multiplicity="0..1" />
+    <End Role="Chambres" Type="Self.Chambre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departement">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Chambres">
+        <PropertyRef Name="Dep_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHAMBRES_ASSOCIATI_TYPECHAM">
+    <End Role="TypeChambre" Type="Self.TypeChambre" Multiplicity="1" />
+    <End Role="Chambres" Type="Self.Chambre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeChambre">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Chambres">
+        <PropertyRef Name="Typ_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LITS_ASSOCIATI_CHAMBRES">
+    <End Role="Chambres" Type="Self.Chambre" Multiplicity="1" />
+    <End Role="Lits" Type="Self.Lit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chambres">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lits">
+        <PropertyRef Name="Cha_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FICHIERA_ASSOCIATI_MEDECIEN">
+    <End Role="Medecien" Type="Self.Medecien" Multiplicity="0..1" />
+    <End Role="FichierAdmissions" Type="Self.FichierAdmission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medecien">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FichierAdmissions">
+        <PropertyRef Name="Med_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FICHIERA_ASSOCIATI_PATIENTS">
+    <End Role="Patients" Type="Self.Patient" Multiplicity="0..1" />
+    <End Role="FichierAdmissions" Type="Self.FichierAdmission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patients">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FichierAdmissions">
+        <PropertyRef Name="Pat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LITS_ASSOCIATI_FICHIERA">
+    <End Role="FichierAdmissions" Type="Self.FichierAdmission" Multiplicity="1" />
+    <End Role="Lits" Type="Self.Lit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FichierAdmissions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lits">
+        <PropertyRef Name="Fic_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NLHEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Chambres" EntityType="Self.Chambre" />
+    <EntitySet Name="Departements" EntityType="Self.Departement" />
+    <EntitySet Name="FichierAdmissions" EntityType="Self.FichierAdmission" />
+    <EntitySet Name="Lits" EntityType="Self.Lit" />
+    <EntitySet Name="Medeciens" EntityType="Self.Medecien" />
+    <EntitySet Name="Patients" EntityType="Self.Patient" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TypeChambres" EntityType="Self.TypeChambre" />
+    <AssociationSet Name="FK_CHAMBRES_ASSOCIATI_DEPARTEM" Association="Self.FK_CHAMBRES_ASSOCIATI_DEPARTEM">
+      <End Role="Departement" EntitySet="Departements" />
+      <End Role="Chambres" EntitySet="Chambres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHAMBRES_ASSOCIATI_TYPECHAM" Association="Self.FK_CHAMBRES_ASSOCIATI_TYPECHAM">
+      <End Role="TypeChambre" EntitySet="TypeChambres" />
+      <End Role="Chambres" EntitySet="Chambres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LITS_ASSOCIATI_CHAMBRES" Association="Self.FK_LITS_ASSOCIATI_CHAMBRES">
+      <End Role="Chambres" EntitySet="Chambres" />
+      <End Role="Lits" EntitySet="Lits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FICHIERA_ASSOCIATI_MEDECIEN" Association="Self.FK_FICHIERA_ASSOCIATI_MEDECIEN">
+      <End Role="Medecien" EntitySet="Medeciens" />
+      <End Role="FichierAdmissions" EntitySet="FichierAdmissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FICHIERA_ASSOCIATI_PATIENTS" Association="Self.FK_FICHIERA_ASSOCIATI_PATIENTS">
+      <End Role="Patients" EntitySet="Patients" />
+      <End Role="FichierAdmissions" EntitySet="FichierAdmissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LITS_ASSOCIATI_FICHIERA" Association="Self.FK_LITS_ASSOCIATI_FICHIERA">
+      <End Role="FichierAdmissions" EntitySet="FichierAdmissions" />
+      <End Role="Lits" EntitySet="Lits" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

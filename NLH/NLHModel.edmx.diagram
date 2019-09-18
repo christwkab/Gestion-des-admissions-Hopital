@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="434867fe693e4a6f8816e5897a8e2778" Name="Diagram1">
+        <EntityTypeShape EntityType="NLHModel.Chambre" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NLHModel.Departement" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NLHModel.FichierAdmission" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NLHModel.Lit" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NLHModel.Medecien" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NLHModel.Patient" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NLHModel.sysdiagram" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NLHModel.TypeChambre" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="NLHModel.FK_CHAMBRES_ASSOCIATI_DEPARTEM" ManuallyRouted="false" />
+        <AssociationConnector Association="NLHModel.FK_CHAMBRES_ASSOCIATI_TYPECHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="NLHModel.FK_LITS_ASSOCIATI_CHAMBRES" ManuallyRouted="false" />
+        <AssociationConnector Association="NLHModel.FK_FICHIERA_ASSOCIATI_MEDECIEN" ManuallyRouted="false" />
+        <AssociationConnector Association="NLHModel.FK_FICHIERA_ASSOCIATI_PATIENTS" ManuallyRouted="false" />
+        <AssociationConnector Association="NLHModel.FK_LITS_ASSOCIATI_FICHIERA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
